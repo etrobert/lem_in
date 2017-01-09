@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:20:36 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/09 16:33:56 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/09 20:39:57 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ static int		paths_list_r(t_anthill *anthill, t_list *cur_path, t_list *paths)
 	t_list_it	it;
 
 	node = ft_list_back(cur_path);
-	if (ft_list_push_back(cur_path, ft_list_it_get(it)) == -1)
-		return (-1);
+	if (node->marked)
+		return (0);
+	print_path(cur_path);
+	ft_printf("Voila les paths\n");
+	ft_list_apply(paths, (t_f_apply)print_path);
 	if (anthill_end(anthill, node))
 	{
 		if (ft_list_push_back(paths, ft_list_cpy(cur_path)) == -1)
 			return (-1);
-		ft_list_pop_back(cur_path);
 		return (0);
 	}
 	anthill_mark(anthill, node);
@@ -34,20 +36,22 @@ static int		paths_list_r(t_anthill *anthill, t_list *cur_path, t_list *paths)
 	it = ft_list_begin(neighbors);
 	while (!ft_list_it_end(neighbors, it))
 	{
+		if (ft_list_push_back(cur_path, ft_list_it_get(it)) == -1)
+			return (-1);
 		if (paths_list_r(anthill, cur_path, paths) == -1)
 			return (-1);
 		ft_list_it_inc(&it);
+		ft_list_pop_back(cur_path);
 	}
 	ft_list_delete(neighbors);
-	ft_list_pop_back(cur_path);
 	anthill_unmark(anthill, node);
 	return (0);
 }
 
 t_list			*paths_list(t_anthill *anthill)
 {
-	t_list	*cur_path;
-	t_list	*paths;
+	t_list		*cur_path;
+	t_list		*paths;
 
 	if ((cur_path = ft_list_new()) == NULL)
 		return (NULL);

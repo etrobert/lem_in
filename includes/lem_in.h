@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/09 16:21:00 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/09 18:29:22 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,19 @@ typedef struct	s_anthill
 	t_list		*pipes;
 }				t_anthill;
 
+t_anthill		*anthill_new(void);
+void			anthill_delete(t_anthill *anthill);
+
 t_room			*anthill_start(t_anthill *anthill);
 bool			anthill_end(t_anthill *anthill, t_room *room);
+
 void			anthill_mark(t_anthill *anthill, t_room *room);
 void			anthill_unmark(t_anthill *anthill, t_room *room);
+
 t_list			*anthill_neighbors(t_anthill *anthill, t_room *room);
 
 t_list			*paths_list(t_anthill *anthill);
+
+void			print_path(t_list *path);
 
 #endif

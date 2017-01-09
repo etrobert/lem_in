@@ -4,10 +4,11 @@ SRCDIR		= srcs
 OBJDIR		= objs
 INCDIR		= includes
 
-SRCNAM		= anthill_start.c anthill_end.c \
+SRCNAM		= anthill_new.c anthill_delete.c anthill_start.c anthill_end.c \
 			  anthill_mark.c anthill_unmark.c \
 			  anthill_neighbors.c \
-			  paths_list.c
+			  paths_list.c print_path.c \
+			  main.c
 INCNAM		= lem_in.h
 
 CC			= clang
