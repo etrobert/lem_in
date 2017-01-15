@@ -9,6 +9,7 @@ SRCNAM		= anthill_new.c anthill_delete.c \
 			  anthill_add_room.c anthill_add_start.c anthill_add_end.c \
 			  anthill_set_start.c anthill_set_end.c \
 			  anthill_add_pipe.c \
+			  room_delete.c \
 			  anthill_mark.c anthill_unmark.c \
 			  paths_list.c select_paths.c print_path.c anthill_print.c \
 			  main.c parse.c plan_movement.c \
@@ -16,7 +17,7 @@ SRCNAM		= anthill_new.c anthill_delete.c \
 INCNAM		= lem_in.h
 
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes
+CFLAGS		= -Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -g
 LDFLAGS		= -L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			= README.md Makefile .gitignore auteur

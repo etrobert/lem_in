@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_delete.c                                   :+:      :+:    :+:   */
+/*   room_delete.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 18:08:27 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 21:23:14 by etrobert         ###   ########.fr       */
+/*   Created: 2017/01/15 21:23:22 by etrobert          #+#    #+#             */
+/*   Updated: 2017/01/15 21:23:51 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	anthill_delete(t_anthill *anthill)
+void	room_delete(t_room *room)
 {
-	if (anthill == NULL)
+	if (room == NULL)
 		return ;
-	ft_list_apply(anthill->rooms, (t_f_apply)(&room_delete));
-	ft_list_delete(anthill->rooms);
-	ft_list_apply(anthill->pipes, &free);
-	ft_list_delete(anthill->pipes);
-	free(anthill);
+	free(room->name);
+	free(room);
 }

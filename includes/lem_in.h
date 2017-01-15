@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 20:08:35 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/15 21:24:20 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			anthill_unmark(t_anthill *anthill, t_room *room);
 void			print_path(t_path *path);
 void			anthill_print(int fd, t_anthill *anthill);
 
-t_anthill		*parse(int fd);
+t_anthill		*parse(int fd, t_list *log);
 
 /*
 ** Path functions
@@ -99,5 +99,8 @@ t_anthill		*parse(int fd);
 t_path			*path_new(t_list *path);
 void			path_delete(t_path *path);
 void			path_remove_ext(t_path *path);
+
+void			plan_movement(t_anthill *anthill, t_list *paths);
+void			room_delete(t_room *room);
 
 #endif

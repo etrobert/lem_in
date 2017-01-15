@@ -2,6 +2,7 @@
 
 ## BONUS
 Pouvoir passer des arguments a la commande et que ca le fasse sur tous les fichiers passes
+Custom error name
 
 ## TODO
 Quand la sortie est un voisin de larrivee est ce quon peut tous les faire passer dans le tunnel en un tour ?
