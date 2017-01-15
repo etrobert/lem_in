@@ -6,39 +6,77 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:57:59 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/09 18:35:55 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/15 20:30:24 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+t_list_it		shortest_path(t_list *paths);
+
 int 			main(void)
 {
 	t_anthill	*anthill;
-	t_room		r1, r2, r3;
-	t_pipe		p;
 	t_list 		*result;
-	t_list_it	it;
+	/*
+	t_list		*log;
 
-	anthill = anthill_new();
-	p = (t_pipe){&r1, &r2};
-	r1 = (t_room){ft_strdup("PIECE 01"), false};
-	r2 = (t_room){ft_strdup("PIECE 02"), false};
-	r3 = (t_room){ft_strdup("PIECE 03"), false};
-	ft_list_push_back(anthill->rooms, &r1);
-	ft_list_push_back(anthill->rooms, &r2);
-	ft_list_push_back(anthill->rooms, &r2);
-	ft_list_push_back(anthill->pipes, &p);
-
-	anthill->start = &r1;
-	anthill->end = &r3;
-	result = paths_list(anthill);
-	
-	it = ft_list_begin(result);
-	while (!ft_list_it_end(result, it))
+	if ((log = ft_list_new()) == NULL)
 	{
-		print_path((t_list *)ft_list_it_get(it));
-		ft_list_it_inc(&it);
+		ft_dprintf(2, "ERROR: [main] Couldnt create log list\n");
+		return (-1);
 	}
+	*/
+	anthill = parse(0);
+	/*
+	anthill = anthill_new();
+
+	anthill_add_room(anthill, "00");
+	anthill_add_room(anthill, "01");
+	anthill_add_room(anthill, "02");
+	anthill_add_room(anthill, "03");
+	anthill_add_room(anthill, "04");
+	anthill_add_room(anthill, "05");
+	anthill_add_room(anthill, "06");
+	anthill_add_room(anthill, "07");
+
+	anthill_set_start(anthill, "01");
+	anthill_set_end(anthill, "00");
+
+	anthill_add_pipe(anthill, "00", "04");
+	anthill_add_pipe(anthill, "00", "06");
+	anthill_add_pipe(anthill, "01", "03");
+	anthill_add_pipe(anthill, "04", "03");
+	anthill_add_pipe(anthill, "05", "02");
+	anthill_add_pipe(anthill, "03", "05");
+	anthill_add_pipe(anthill, "04", "02");
+	anthill_add_pipe(anthill, "02", "01");
+	anthill_add_pipe(anthill, "07", "06");
+	anthill_add_pipe(anthill, "07", "02");
+	anthill_add_pipe(anthill, "07", "04");
+	anthill_add_pipe(anthill, "06", "05");
+	*/
+
+	anthill_print(2, anthill);
+
+	if (anthill->start == NULL || anthill->end == NULL)
+	{
+		//FREE
+		ft_dprintf(2, "ERROR: No start or end room\n");
+		return (0);
+	}
+	//Si start et end sont la meme map on fait rien
+	//Sils sont voisins on les decale tous dun coup
+	//Sinon
+	result = paths_list(anthill);
+	//Sil ny a pas de chemin possible on fait error
+	ft_list_apply(result, (t_f_apply)&print_path);
+
+	printf("////////////////////////\n");
+//	ft_printf("\nAnd the winner is ...\n");
+//	print_path(ft_list_it_get(result, shortest_path(result)));
+//	ft_list_apply(select_paths(result), (t_f_apply)(&print_path));
+	
+	// FREE
 	return (0);
 }

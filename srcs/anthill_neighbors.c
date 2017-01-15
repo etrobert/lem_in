@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:01:50 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/09 16:12:47 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/12 09:46:41 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list			*anthill_neighbors(t_anthill *anthill, t_room *room)
 	it = ft_list_begin(anthill->pipes);
 	while (!ft_list_it_end(anthill->pipes, it))
 	{
-		pipe = (t_pipe *)ft_list_it_get(it);
+		pipe = (t_pipe *)ft_list_it_get(anthill->pipes, it);
 		if (pipe->room1 == room)
 			if (ft_list_push_back(list, pipe->room2) == -1)
 			{

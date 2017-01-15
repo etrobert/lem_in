@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_new.c                                      :+:      :+:    :+:   */
+/*   path_remove_ext.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 17:59:28 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 18:15:42 by etrobert         ###   ########.fr       */
+/*   Created: 2017/01/15 20:07:42 by etrobert          #+#    #+#             */
+/*   Updated: 2017/01/15 20:09:10 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_anthill		*anthill_new(void)
+void	path_remove_ext(t_path *path)
 {
-	t_anthill	*anthill;
-
-	if ((anthill = (t_anthill *)malloc(sizeof(t_anthill))) == NULL)
-		return (NULL);
-	if ((anthill->rooms = ft_list_new()) == NULL)
-	{
-		anthill_delete(anthill);
-		return (NULL);
-	}
-	if ((anthill->pipes = ft_list_new()) == NULL)
-	{
-		anthill_delete(anthill);
-		return (NULL);
-	}
-	anthill->start = NULL;
-	anthill->end = NULL;
-	return (anthill);
+	if (path == NULL)
+		return ;
+	ft_list_pop_front(path->path);
+	ft_list_pop_back(path->path);
 }

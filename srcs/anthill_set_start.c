@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_new.c                                      :+:      :+:    :+:   */
+/*   anthill_set_start.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 17:59:28 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 18:15:42 by etrobert         ###   ########.fr       */
+/*   Created: 2017/01/12 09:17:12 by etrobert          #+#    #+#             */
+/*   Updated: 2017/01/12 09:47:02 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_anthill		*anthill_new(void)
+void			anthill_set_start(t_anthill *anthill, char *name)
 {
-	t_anthill	*anthill;
+	t_list_it	it;
+	t_room		*room;
 
-	if ((anthill = (t_anthill *)malloc(sizeof(t_anthill))) == NULL)
-		return (NULL);
-	if ((anthill->rooms = ft_list_new()) == NULL)
+	it = ft_list_begin(anthill->rooms);
+	while (!ft_list_it_end(anthill->rooms, it))
 	{
-		anthill_delete(anthill);
-		return (NULL);
+		room = (t_room *)ft_list_it_get(anthill->rooms, it);
+		if (ft_strcmp(room->name, name) == 0)
+			anthill->start = room;
+		ft_list_it_inc(&it);
 	}
-	if ((anthill->pipes = ft_list_new()) == NULL)
-	{
-		anthill_delete(anthill);
-		return (NULL);
-	}
-	anthill->start = NULL;
-	anthill->end = NULL;
-	return (anthill);
 }

@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_new.c                                      :+:      :+:    :+:   */
+/*   path_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 17:59:28 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 18:15:42 by etrobert         ###   ########.fr       */
+/*   Created: 2017/01/15 19:54:24 by etrobert          #+#    #+#             */
+/*   Updated: 2017/01/15 19:57:27 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_anthill		*anthill_new(void)
+t_path		*path_new(t_list *path)
 {
-	t_anthill	*anthill;
+	t_path	*ret;
 
-	if ((anthill = (t_anthill *)malloc(sizeof(t_anthill))) == NULL)
+	if ((ret = (t_path *)(malloc(sizeof(t_path)))) == NULL)
 		return (NULL);
-	if ((anthill->rooms = ft_list_new()) == NULL)
+	if ((ret->path = ft_list_cpy(path)) == NULL)
 	{
-		anthill_delete(anthill);
+		free(ret);
 		return (NULL);
 	}
-	if ((anthill->pipes = ft_list_new()) == NULL)
-	{
-		anthill_delete(anthill);
-		return (NULL);
-	}
-	anthill->start = NULL;
-	anthill->end = NULL;
-	return (anthill);
+	ret->ants_to_go = 0;
+	return (ret);
 }
