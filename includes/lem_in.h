@@ -6,12 +6,14 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 21:24:20 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/16 11:42:57 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
+
+# define EMPTY_ROOM 0
 
 # include <stdbool.h>
 # include "libft.h"
@@ -26,6 +28,7 @@ typedef struct	s_room
 {
 	char		*name;
 	bool		marked;
+	int			ant;
 }				t_room;
 
 typedef struct	s_pipe
@@ -50,27 +53,16 @@ typedef struct	s_path
 }				t_path;
 
 /*
-** Constructors and Destructors
+** Anthill functions
 */
 
 t_anthill		*anthill_new(void);
 void			anthill_delete(t_anthill *anthill);
 
-/*
-** Accessors
-*/
-
 t_room			*anthill_start(t_anthill *anthill);
 bool			anthill_end(t_anthill *anthill, t_room *room);
 
 t_list			*anthill_neighbors(t_anthill *anthill, t_room *room);
-
-t_list			*paths_list(t_anthill *anthill);
-t_list			*select_paths(const t_list *paths);
-
-/*
-** Modifiers
-*/
 
 int				anthill_add_room(t_anthill *anthill, char *name);
 int				anthill_add_start(t_anthill *anthill, char *name);
@@ -90,6 +82,10 @@ void			anthill_unmark(t_anthill *anthill, t_room *room);
 void			print_path(t_path *path);
 void			anthill_print(int fd, t_anthill *anthill);
 
+/*
+** Parsing
+*/
+
 t_anthill		*parse(int fd, t_list *log);
 
 /*
@@ -100,7 +96,19 @@ t_path			*path_new(t_list *path);
 void			path_delete(t_path *path);
 void			path_remove_ext(t_path *path);
 
+/*
+** Solving functions
+*/
+
+t_list			*paths_list(t_anthill *anthill);
+t_list			*select_paths(const t_list *paths);
 void			plan_movement(t_anthill *anthill, t_list *paths);
+void			move(int fd, t_anthill *anthill, t_list *paths);
+
+/*
+** Other
+*/
+
 void			room_delete(t_room *room);
 
 #endif

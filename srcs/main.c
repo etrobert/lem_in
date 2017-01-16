@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:57:59 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 21:22:30 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/16 12:30:28 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list_it		shortest_path(t_list *paths);
 
-void			putstr_fd_line(char *str)
+void			putstr_line(char *str)
 {
 	ft_putstr(str);
 	ft_putchar('\n');
@@ -23,7 +23,8 @@ void			putstr_fd_line(char *str)
 int 			main(void)
 {
 	t_anthill	*anthill;
-	t_list 		*result;
+	t_list 		*all_paths;
+	t_list		*selected_paths;
 	t_list		*log;
 
 	if ((log = ft_list_new()) == NULL)
@@ -50,25 +51,30 @@ int 			main(void)
 	//Si start et end sont la meme map on fait rien
 	//Sils sont voisins on les decale tous dun coup
 	//Sinon
-	result = paths_list(anthill);
-	plan_movement(anthill, result);
+	all_paths = paths_list(anthill);
+
 	//Sil ny a pas de chemin possible on fait error
-	ft_list_apply(result, (t_f_apply)&print_path);
+	
+	selected_paths = select_paths(all_paths);
+
+	plan_movement(anthill, selected_paths);
+	ft_list_apply(selected_paths, (t_f_apply)&print_path);
 	ft_printf("\n");
-	ft_list_apply(result, (t_f_apply)(&path_delete));
-	ft_list_delete(result);
 
-
-	ft_list_apply(log, (t_f_apply)(&putstr_fd_line));
+	// Affichage des logs
+	ft_list_apply(log, (t_f_apply)(&putstr_line));
 	ft_list_apply(log, &free);
 	ft_list_delete(log);
 
 	ft_printf("\n");
-	printf("////////////////////////\n");
-//	ft_printf("\nAnd the winner is ...\n");
-//	print_path(ft_list_it_get(result, shortest_path(result)));
-//	ft_list_apply(select_paths(result), (t_f_apply)(&print_path));
-	
+
+	move(1, anthill, selected_paths);
+
+	//Liberation de la memoire
+	ft_list_apply(all_paths, (t_f_apply)(&path_delete));
+	ft_list_delete(all_paths);
+	ft_list_delete(selected_paths);
+
 	anthill_delete(anthill);
 	return (0);
 }

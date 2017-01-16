@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 09:30:51 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/12 15:15:27 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/16 11:58:02 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,42 @@ static t_list_it	shortest_path(t_list *paths)
 	t_list_it		it;
 	t_list_it		best;
 	size_t			best_size;
-	t_list			*path;
+	t_path			*path;
 
 	best_size = SIZE_MAX;
 	best = ft_list_begin(paths);
 	it = ft_list_begin(paths);
 	while (!ft_list_it_end(paths, it))
 	{
-		path = (t_list *)(ft_list_it_get(paths, it));
-		if (ft_list_size(path) < best_size)
+		path = (t_path *)(ft_list_it_get(paths, it));
+		if (ft_list_size(path->path) < best_size)
 		{
 			best = it;
-			best_size = ft_list_size(path);
+			best_size = ft_list_size(path->path);
 		}
 		ft_list_it_inc(&it);
 	}
 	return (best);
 }
 
-static void			clean_paths(t_list *paths, t_list *best)
+static void			clean_paths(t_list *paths, t_path *best)
 {
 	t_list_it		cur_path;
 	t_list_it		cur_room;
-	t_list			*path;
+	t_path			*path;
 	t_room			*room;
 	bool			erased;
 
 	cur_path = ft_list_begin(paths);
 	while (!ft_list_it_end(paths, cur_path))
 	{
-		path = (t_list *)(ft_list_it_get(paths, cur_path));
+		path = (t_path *)(ft_list_it_get(paths, cur_path));
 		erased = false;
-		cur_room = ft_list_begin(best);
-		while (!erased && !ft_list_it_end(best, cur_room))
+		cur_room = ft_list_begin(best->path);
+		while (!erased && !ft_list_it_end(best->path, cur_room))
 		{
-			room = (t_room *)(ft_list_it_get(best, cur_room));
-			if (!ft_list_it_end(path, ft_list_find(path, room)))
+			room = (t_room *)(ft_list_it_get(best->path, cur_room));
+			if (!ft_list_it_end(path->path, ft_list_find(path->path, room)))
 			{
 				cur_path = ft_list_erase(paths, cur_path);
 				erased = true;
@@ -81,7 +81,7 @@ t_list				*select_paths(const t_list *paths)
 	{
 		it = shortest_path(paths_cpy);
 		ft_list_push_back(best_paths, ft_list_it_get(paths_cpy, it));
-		clean_paths(paths_cpy, ft_list_it_get(paths_cpy, it));
+		clean_paths(paths_cpy, (t_path *)(ft_list_it_get(paths_cpy, it)));
 	}
 	ft_list_delete(paths_cpy);
 	return (best_paths);

@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:35:25 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/10 19:55:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/16 12:01:31 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int			anthill_add_room(t_anthill *anthill, char *name)
 	}
 	room->name = ft_strdup(name);
 	room->marked = false;
+	room->ant = EMPTY_ROOM;
 	return (0);
 }

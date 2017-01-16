@@ -13,7 +13,7 @@ SRCNAM		= anthill_new.c anthill_delete.c \
 			  anthill_mark.c anthill_unmark.c \
 			  paths_list.c select_paths.c print_path.c anthill_print.c \
 			  main.c parse.c plan_movement.c \
-			  path_new.c path_delete.c path_remove_ext.c
+			  path_new.c path_delete.c path_remove_ext.c move.c
 INCNAM		= lem_in.h
 
 CC			= clang
@@ -31,8 +31,8 @@ INC			= $(INCNAM:%=$(INCDIR)/%)
 OBJ			= $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all:
-	$(MAKE) -C $(LIBFTDIR)
-	$(MAKE) $(NAME)
+	@$(MAKE) $(LIBFTNAM) -C $(LIBFTDIR)
+	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
