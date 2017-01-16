@@ -6,14 +6,24 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/16 11:42:57 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/16 17:13:42 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+# ifdef LEM_ERROR_V
+#  define LEM_ERROR_V_ON true
+# else
+#  define LEM_ERROR_V_ON false
+# endif
+
 # define EMPTY_ROOM 0
+
+# define LEM_ERR_NO_PATH -1
+# define LEM_ERR_NO_START_END -2
+# define LEM_ERR_MALLOC -3
 
 # include <stdbool.h>
 # include "libft.h"
@@ -81,12 +91,16 @@ void			anthill_unmark(t_anthill *anthill, t_room *room);
 
 void			print_path(t_path *path);
 void			anthill_print(int fd, t_anthill *anthill);
+void			print_room(t_room *room);
+void			move_print(int ant, t_room *room, bool *start);
+void			print_error(int n);
 
 /*
 ** Parsing
 */
 
 t_anthill		*parse(int fd, t_list *log);
+int				parse_map(int fd, t_anthill *anthill, t_list *log);
 
 /*
 ** Path functions
@@ -97,13 +111,14 @@ void			path_delete(t_path *path);
 void			path_remove_ext(t_path *path);
 
 /*
-** Solving functions
+** Solving function
 */
 
+int				solve(t_anthill *anthill, t_list *log);
 t_list			*paths_list(t_anthill *anthill);
 t_list			*select_paths(const t_list *paths);
 void			plan_movement(t_anthill *anthill, t_list *paths);
-void			move(int fd, t_anthill *anthill, t_list *paths);
+void			move(t_anthill *anthill, t_list *paths);
 
 /*
 ** Other

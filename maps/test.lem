@@ -1,0 +1,10 @@
+7
+#Bonjour :)
+##start
+#Hello
+ROOM_START 0 0
+##end
+ROOM_END 1 1
+ROOM_03 2 2
+ROOM_START-ROOM_03
+ROOM_03-ROOM_END
