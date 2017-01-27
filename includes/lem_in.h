@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/16 17:13:42 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:37:00 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define LEM_ERR_NO_PATH -1
 # define LEM_ERR_NO_START_END -2
 # define LEM_ERR_MALLOC -3
+# define LEM_ERR_PARSING -4
+# define LEM_ERR_OPEN -5
 
 # include <stdbool.h>
 # include "libft.h"
@@ -61,6 +63,8 @@ typedef struct	s_path
 	t_list		*path;
 	int			ants_to_go;
 }				t_path;
+
+int				lem_in(int fd);
 
 /*
 ** Anthill functions

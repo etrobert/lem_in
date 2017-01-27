@@ -31,9 +31,10 @@ le nom de la deuxieme salle
 - Si l'une des deux salles n'a pas ete auparavent definie la ligne est ignoree
 
 ## BONUS
-- Pouvoir passer des fichiers a traiter en arguments a la commande
+- Pouvoir passer des fichiers a traiter en arguments a la commande en utilisant
+main\_bonus.c
 - On peut envoyer une serie de salles puis de pipes puis de nouveau de salles
-- Custom error name
+- Custom error name with -D LEM\_ERROR\_V
 
 ## TODO
 - Bonus arguments de commande

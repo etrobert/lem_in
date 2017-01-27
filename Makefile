@@ -4,7 +4,7 @@ SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
 
-SRCNAM		=	main.c \
+SRCNAM		=	main_bonus.c lem_in.c \
 				anthill_new.c anthill_delete.c \
 			 	anthill_start.c anthill_end.c anthill_neighbors.c \
 			 	anthill_add_room.c anthill_add_start.c anthill_add_end.c \

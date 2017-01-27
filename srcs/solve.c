@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 16:40:07 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/16 17:11:45 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/27 18:03:53 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int		solve_normal(t_anthill *anthill, t_list *log)
 	t_list		*all_paths;
 	t_list		*selected_paths;
 
+	ft_printf("STARTING TO BUILD PATHS\n");
 	all_paths = paths_list(anthill);
+	ft_printf("ENDING TO BUILD PATHS\n");
 	if (ft_list_size(all_paths) == 0)
 	{
 		ft_list_delete(all_paths);
