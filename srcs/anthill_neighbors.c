@@ -6,12 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:01:50 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/16 17:19:50 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:15:25 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+/*
 t_list			*anthill_neighbors(t_anthill *anthill, t_room *room)
 {
 	t_list_it	it;
@@ -39,4 +40,11 @@ t_list			*anthill_neighbors(t_anthill *anthill, t_room *room)
 		ft_list_it_inc(&it);
 	}
 	return (list);
+}
+*/
+
+t_list			*anthill_neighbors(t_anthill *anthill, t_room *room)
+{
+	(void)anthill;
+	return (room->neighbors);
 }

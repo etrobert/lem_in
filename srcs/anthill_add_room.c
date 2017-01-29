@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 17:35:25 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/16 12:01:31 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:18:09 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ int			anthill_add_room(t_anthill *anthill, char *name)
 		free(room);
 		return (-1);
 	}
-	room->name = ft_strdup(name);
+	if ((room->neighbors = ft_list_new()) == NULL)
+	{
+		free(room);
+		return (-1);
+	}
+	if ((room->name = ft_strdup(name)) == NULL)
+	{
+		free(room);
+		return (-1);
+	}
 	room->marked = false;
 	room->ant = EMPTY_ROOM;
 	return (0);

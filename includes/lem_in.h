@@ -6,7 +6,7 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 11:15:55 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/18 16:37:00 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/29 19:57:16 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,23 @@ typedef struct	s_room
 	char		*name;
 	bool		marked;
 	int			ant;
+	t_list		*neighbors;
 }				t_room;
 
+/*
 typedef struct	s_pipe
 {
 	t_room		*room1;
 	t_room		*room2;
 }				t_pipe;
+*/
 
 typedef struct	s_anthill
 {
 	t_room		*start;
 	t_room		*end;
 	t_list		*rooms;
-	t_list		*pipes;
+//	t_list		*pipes;
 	int			ants;
 }				t_anthill;
 
@@ -113,6 +116,7 @@ int				parse_map(int fd, t_anthill *anthill, t_list *log);
 t_path			*path_new(t_list *path);
 void			path_delete(t_path *path);
 void			path_remove_ext(t_path *path);
+bool			path_common_room(t_list *l1, t_list *l2);
 
 /*
 ** Solving function
@@ -123,6 +127,7 @@ t_list			*paths_list(t_anthill *anthill);
 t_list			*select_paths(const t_list *paths);
 void			plan_movement(t_anthill *anthill, t_list *paths);
 void			move(t_anthill *anthill, t_list *paths);
+int				update_paths(t_list *paths, t_list *new_path);
 
 /*
 ** Other

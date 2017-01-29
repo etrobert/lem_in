@@ -14,13 +14,14 @@ SRCNAM		=	main_bonus.c lem_in.c \
 			 	print_path.c anthill_print.c print_room.c move_print.c \
 			 	print_error.c \
 			 	parse.c parse_map.c \
-			 	path_new.c path_delete.c path_remove_ext.c \
+			 	path_new.c path_delete.c path_remove_ext.c path_common_room.c \
 			 	solve.c paths_list.c select_paths.c move.c plan_movement.c \
+				update_paths.c \
 			 	room_delete.c
 INCNAM		=	lem_in.h
 
 CC			=	clang
-CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -D LEM_ERROR_V
+CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -D LEM_ERROR_V -g
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
 GIT			=	README.md Makefile .gitignore auteur

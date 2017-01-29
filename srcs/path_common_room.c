@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anthill_new.c                                      :+:      :+:    :+:   */
+/*   path_common_room.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/09 17:59:28 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/27 19:19:45 by etrobert         ###   ########.fr       */
+/*   Created: 2017/01/27 18:45:39 by etrobert          #+#    #+#             */
+/*   Updated: 2017/01/27 18:49:33 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_anthill		*anthill_new(void)
+bool			path_common_room(t_list *l1, t_list *l2)
 {
-	t_anthill	*anthill;
+	t_list_it	it;
 
-	if ((anthill = (t_anthill *)malloc(sizeof(t_anthill))) == NULL)
-		return (NULL);
-	if ((anthill->rooms = ft_list_new()) == NULL)
+	it = l1->begin(l1);
+	while (!l1->it_end(l1, it))
 	{
-		anthill_delete(anthill);
-		return (NULL);
+		if (!l2->it_end(l2, l2->find(l2, l1->it_get(l1, it))))
+			return (true);
+		ft_list_it_inc(&it);
 	}
-	/*
-	if ((anthill->pipes = ft_list_new()) == NULL)
-	{
-		anthill_delete(anthill);
-		return (NULL);
-	}
-	*/
-	anthill->start = NULL;
-	anthill->end = NULL;
-	return (anthill);
+	return (false);
 }

@@ -6,12 +6,13 @@
 /*   By: etrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 16:20:36 by etrobert          #+#    #+#             */
-/*   Updated: 2017/01/15 20:08:43 by etrobert         ###   ########.fr       */
+/*   Updated: 2017/01/29 19:57:05 by etrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+/*
 static int		paths_list_end(t_list *cur_path, t_list *paths)
 {
 	t_path		*path;
@@ -24,6 +25,12 @@ static int		paths_list_end(t_list *cur_path, t_list *paths)
 		return (-1);
 	}
 	return (0);
+}
+*/
+
+static int		paths_list_end(t_list *cur_path, t_list *paths)
+{
+	return (update_paths(paths, cur_path));
 }
 
 static int		paths_list_r(t_anthill *anthill,
@@ -51,7 +58,7 @@ static int		paths_list_r(t_anthill *anthill,
 		ft_list_it_inc(&it);
 		ft_list_pop_back(cur_path);
 	}
-	ft_list_delete(neighbors);
+//	ft_list_delete(neighbors);
 	anthill_unmark(anthill, node);
 	return (0);
 }
