@@ -1,5 +1,8 @@
 NAME		=	lem-in
 
+COLOR		=	\033[31m
+COLOR_RESET	=	\033[0m
+
 SRCDIR		=	srcs
 OBJDIR		=	objs
 INCDIR		=	includes
@@ -23,7 +26,18 @@ CC			=	clang
 CFLAGS		=	-Wall -Wextra -Werror -I$(INCDIR) -I $(LIBFTDIR)/includes -D LEM_ERROR_V
 LDFLAGS		=	-L $(LIBFTDIR) -l$(LIBFTNAM:lib%.a=%)
 
-GIT			=	README.md Makefile .gitignore auteur
+MAPS		=	maps/error.lem \
+				maps/just_ants.lem \
+				maps/multi.lem \
+				maps/neg.lem \
+				maps/nei.lem \
+				maps/no_pipe.lem \
+				maps/nothing.lem \
+				maps/same.lem \
+				maps/test.lem \
+				maps/test_0.lem
+
+GIT			=	README.md Makefile .gitignore auteur $(MAPS)
 
 LIBFTDIR	=	~/work/libft
 LIBFTNAM	=	libft.a
@@ -38,30 +52,49 @@ all:
 	@$(MAKE) $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	@$(MAKE) printname
+	@printf "%-15s%s\n" Linking $@
+	@$(CC) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
-	mkdir -p $(OBJDIR)
-	$(CC) -o $@ -c $< $(CFLAGS)
+	@$(MAKE) printname
+	@printf "%-15s%s\n" Compiling $@ 
+	@mkdir -p $(OBJDIR)
+	@$(CC) -o $@ -c $< $(CFLAGS)
 
-.PHONY: all git no check clean fclean re
+printname:
+	@printf "$(COLOR)"
+	@printf "[%-15s " "$(NAME)]"
+	@printf "$(COLOR_RESET)"
+
+.PHONY: all git no check clean fclean re printname
 
 git:
+	@$(MAKE) printname
+	@echo Adding files to git repository
 	git add $(SRC) $(INC) $(GIT)
+	@$(MAKE) git -C $(LIBFTDIR)
 
 no:
+	@$(MAKE) printname
 	@echo "Passage de la norminette :"
 	@norminette $(SRC) $(INC)| grep -B1 Error | cat
+	@$(MAKE) no -C $(LIBFTDIR)
 
 check: no
 
 clean:
-	rm -rf $(OBJDIR)
+	@$(MAKE) printname
+	@echo Suppressing obj files
+	@$(MAKE) fclean -C $(LIBFTDIR)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	@$(MAKE) printname
+	@echo Suppressing $(NAME)
+	@rm -rf $(NAME)
 
 # $(MAKE) needed so that the cleaning is done before starting to create again \
 	# cf make -j 
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
