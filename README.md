@@ -1,5 +1,18 @@
 # lem-in
 
+Algorithmic project made at 42 school
+
+Given a representation of an antfarm in the form of a graph,
+      the program has to print it to the standard output as well as a
+      way to move all the ants from the start to the end in the smallest
+      number of moves.
+
+Example maps can be found in maps/
+
+## Usage
+
+```usage: lem-in < map.lem```
+
 ## Precisions sur le parsing
 - Le nombre de fourmis sera indique sur la premiere ligne de sorte a etre lu
 par un atoi.
