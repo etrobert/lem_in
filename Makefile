@@ -39,7 +39,7 @@ MAPS		=	maps/error.lem \
 
 GIT			=	README.md Makefile .gitignore auteur $(MAPS)
 
-LIBFTDIR	=	~/work/libft
+LIBFTDIR	=	libft
 LIBFTNAM	=	libft.a
 LIBFT		=	$(LIBFTNAM:%=$(LIBFTDIR)/%)
 
@@ -50,6 +50,11 @@ OBJ			=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 all:
 	@$(MAKE) $(LIBFTNAM) -C $(LIBFTDIR)
 	@$(MAKE) $(NAME)
+
+setup:
+	@$(MAKE) -s printname
+	@echo "Initialising submodules"
+	@git submodule update --init --recursive
 
 $(NAME): $(OBJ)
 	@$(MAKE) printname
